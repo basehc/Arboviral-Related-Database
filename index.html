@@ -32,7 +32,7 @@
 <script>
 $(document).ready(function() {
     $('#arbovirusTable').DataTable({
-        ajax: 'data.json',
+    ajax: 'https://cors-anywhere.herokuapp.com/https://raw.githubusercontent.com/basehc/Arboviral-Related-Database/main/data.json',
         columns: [
             { data: 'abrovirus_naive_name(初始生物名)' },
             { data: 'abrovirus_naive_name(linux)' },
