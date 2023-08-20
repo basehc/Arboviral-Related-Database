@@ -1,3 +1,0 @@
-# Arboviral-Related-Database
-
-test
