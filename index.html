@@ -19,6 +19,10 @@
             border-collapse: collapse;
             width: 100%;
             background-color: #fff;
+            display: none; /* Hide all tables by default */
+        }
+        table.active {
+            display: table; /* Only show the active table */
         }
         table, th, td {
             border: 1px solid #ddd;
@@ -30,7 +34,43 @@
         tr:hover {
             background-color: #f5f5f5;
         }
+        #pagination {
+            margin-top: 20px;
+        }
     </style>
+    <script>
+        let currentPage = 1;
+        const itemsPerPage = 20;
+        const totalPages = Math.ceil(1975 / itemsPerPage);
+        
+        function showPage(pageNumber) {
+            // Hide all tables
+            document.querySelectorAll('table').forEach(table => {
+                table.classList.remove('active');
+            });
+            
+            // Show the selected table
+            document.querySelector('#table-page-' + pageNumber).classList.add('active');
+            currentPage = pageNumber;
+            document.querySelector('#current-page').textContent = currentPage;
+        }
+        
+        function nextPage() {
+            if (currentPage < totalPages) {
+                showPage(currentPage + 1);
+            }
+        }
+        
+        function prevPage() {
+            if (currentPage > 1) {
+                showPage(currentPage - 1);
+            }
+        }
+        
+        window.onload = function() {
+            showPage(1); // Show the first page initially
+        }
+    </script>
 </head>
 <body>
     <h1>Arthropod-borne Associated Viruses Database</h1>
@@ -38,17 +78,12 @@
     
     <h2>Data Statistics</h2>
     <h3>Viruses by Order</h3>
-    <ul>
-        <li>Bunyavirales: 784</li><li>Amarillovirales: 372</li><li>Piccovirales: 179</li><li>Geplafuvirales: 150</li><li>Reovirales: 148</li><li>Mononegavirales: 131</li><li>Martellivirales: 79</li><li>Articulavirales: 56</li><li>Picornavirales: 24</li><li>Fabales: 13</li><li>Nidovirales: 10</li><li>Cirlivirales: 10</li><li>Chitovirales: 7</li><li>Acoela: 2</li><li>Gentianales: 1</li><li>Coleoptera: 1</li><li>Asfuvirales: 1</li><li>Lepidoptera: 1</li><li>Ortervirales: 1</li><li>Sobelivirales: 1</li><li>Blubervirales: 1</li><li>Nodamuvirales: 1</li><li>Herpesvirales: 1</li><li>Zurhausenvirales: 1</li>
-    </ul>
-    
-    <h3>Viruses by Family</h3>
-    <ul>
-        <li>Flaviviridae: 372</li><li>Phenuiviridae: 332</li><li>Peribunyaviridae: 320</li><li>Parvoviridae: 179</li><li>Genomoviridae: 150</li><li>Rhabdoviridae: 117</li><li>Sedoreoviridae: 113</li><li>Nairoviridae: 96</li><li>Togaviridae: 79</li><li>Orthomyxoviridae: 56</li><li>Spinareoviridae: 35</li><li>Picornaviridae: 24</li><li>Hantaviridae: 20</li><li>Arenaviridae: 15</li><li>Fabaceae: 13</li><li>Circoviridae: 10</li><li>Arteriviridae: 9</li><li>Poxviridae: 7</li><li>Filoviridae: 5</li><li>Nyamiviridae: 4</li><li>Paramyxoviridae: 2</li><li>Convolutidae: 2</li><li>Xinmoviridae: 2</li><li>Coronaviridae: 1</li><li>Nodaviridae: 1</li><li>Solemoviridae: 1</li><li>Hepadnaviridae: 1</li><li>Herpesviridae: 1</li><li>Mymonaviridae: 1</li><li>Retroviridae: 1</li><li>Erebidae: 1</li><li>Asfarviridae: 1</li><li>Rubiaceae: 1</li><li>Staphylinidae: 1</li><li>Phenuiviridae : 1</li><li>Papillomaviridae: 1</li>
-    </ul>
+    <img src="viruses_by_order.png" alt="Viruses Distribution by Order" width="100%">
     
     <h2>Viruses Data</h2>
-    <table border="1" class="dataframe dataframe">
+
+    <table id="table-page-1">
+        <table border="1" class="dataframe dataframe">
   <thead>
     <tr style="text-align: right;">
       <th>Name</th>
@@ -388,6 +423,31 @@
       <td>35064663.0</td>
       <td>Mosquito</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-2">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Aedes galloisi flavivirus</td>
       <td>NaN</td>
@@ -708,6 +768,31 @@
       <td>33974139.0</td>
       <td>Tick</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-3">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Almpiwar virus</td>
       <td>NaN</td>
@@ -1028,6 +1113,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-4">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Anhembi virus</td>
       <td>NaN</td>
@@ -1348,6 +1458,31 @@
       <td>NaN</td>
       <td>Tick</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-5">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Aruac virus</td>
       <td>NaN</td>
@@ -1668,6 +1803,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-6">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Bakau virus</td>
       <td>NaN</td>
@@ -1988,6 +2148,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-7">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Bat flavivirus RC E. franqueti P 19</td>
       <td>NaN</td>
@@ -2308,6 +2493,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-8">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Benevides orthobunyavirus</td>
       <td>NaN</td>
@@ -2628,6 +2838,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-9">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Blue tit hepacivirus</td>
       <td>NaN</td>
@@ -2948,6 +3183,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-10">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Bocavirus pig/ZJD/China/2006</td>
       <td>NaN</td>
@@ -3268,6 +3528,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-11">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Bovine hokovirus 1</td>
       <td>NaN</td>
@@ -3588,6 +3873,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-12">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Bujaru virus</td>
       <td>NaN</td>
@@ -3908,6 +4218,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-13">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>CHeRI orbivirus 3-3</td>
       <td>NaN</td>
@@ -4228,6 +4563,31 @@
       <td>24015178.0</td>
       <td>Mosquito</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-14">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>California sea lion bocavirus 4</td>
       <td>NaN</td>
@@ -4548,6 +4908,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-15">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Carnivore bocaparvovirus 2</td>
       <td>NaN</td>
@@ -4868,6 +5253,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-16">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Chagres virus</td>
       <td>NaN</td>
@@ -5188,6 +5598,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-17">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Chiropteran bocaparvovirus 1</td>
       <td>NaN</td>
@@ -5508,6 +5943,31 @@
       <td>NaN</td>
       <td>Mosquito</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-18">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Clanis bilineata cypovirus</td>
       <td>NaN</td>
@@ -5828,6 +6288,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-19">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Culex pipiens densovirus</td>
       <td>NaN</td>
@@ -6148,6 +6633,31 @@
       <td>NaN</td>
       <td>Mosquito</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-20">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Cyclopterus lumpus virus</td>
       <td>NaN</td>
@@ -6468,6 +6978,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-21">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Dendrolimus punctatus cypovirus 22</td>
       <td>Accepted</td>
@@ -6788,6 +7323,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-22">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Duck flavivirus LG/01/11</td>
       <td>NaN</td>
@@ -7108,6 +7668,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-23">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Emberiza spodocephala ambidensovirus</td>
       <td>NaN</td>
@@ -7428,6 +8013,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-24">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Everglades virus</td>
       <td>Accepted</td>
@@ -7748,6 +8358,31 @@
       <td>NaN</td>
       <td>Mosquito</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-25">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Flavivirus CJD05/CHN/2010</td>
       <td>NaN</td>
@@ -8068,6 +8703,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-26">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Freshwater butterflyfish hepacivirus</td>
       <td>NaN</td>
@@ -8388,6 +9048,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-27">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Gan Gan virus</td>
       <td>NaN</td>
@@ -8708,6 +9393,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-28">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Gemycircularvirus cassa1</td>
       <td>Accepted</td>
@@ -9028,6 +9738,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-29">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Gemycircularvirus geras1</td>
       <td>Accepted</td>
@@ -9348,6 +10083,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-30">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Gemycircularvirus lynca4</td>
       <td>Accepted</td>
@@ -9668,6 +10428,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-31">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Gemycircularvirus ptero6</td>
       <td>Accepted</td>
@@ -9988,6 +10773,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-32">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Gemycircularvirus willde1</td>
       <td>Accepted</td>
@@ -10308,6 +11118,31 @@
       <td>21715500.0</td>
       <td>Mosquito</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-33">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Grand Arbaud virus</td>
       <td>NaN</td>
@@ -10628,6 +11463,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-34">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Guangxi orbivirus</td>
       <td>NaN</td>
@@ -10948,6 +11808,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-35">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Hanko virus</td>
       <td>NaN</td>
@@ -11268,6 +12153,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-36">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Hepacivirus H</td>
       <td>Accepted</td>
@@ -11588,6 +12498,31 @@
       <td>28747815.0</td>
       <td>Mosquito</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-37">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Huaiyangshan virus</td>
       <td>NaN</td>
@@ -11908,6 +12843,31 @@
       <td>NaN</td>
       <td>Tick</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-38">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Iguape virus</td>
       <td>NaN</td>
@@ -12228,6 +13188,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-39">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Itupiranga virus</td>
       <td>NaN</td>
@@ -12548,6 +13533,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-40">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Jutiapa virus</td>
       <td>NaN</td>
@@ -12868,6 +13878,31 @@
       <td>35685931.0</td>
       <td>Tick</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-41">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Kasba virus</td>
       <td>NaN</td>
@@ -13188,6 +14223,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-42">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Kismayo virus</td>
       <td>NaN</td>
@@ -13508,6 +14568,31 @@
       <td>37482135.0</td>
       <td>Tick</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-43">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Kyzylagach virus</td>
       <td>NaN</td>
@@ -13828,6 +14913,31 @@
       <td>6107028.0</td>
       <td>Mosquito</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-44">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Leopards Hill orthonairovirus</td>
       <td>NaN</td>
@@ -14148,6 +15258,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-45">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Louping ill virus</td>
       <td>NaN</td>
@@ -14468,6 +15603,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-46">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Main Drain virus</td>
       <td>NaN</td>
@@ -14788,6 +15948,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-47">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Marrakai virus</td>
       <td>NaN</td>
@@ -15108,6 +16293,31 @@
       <td>26304915.0</td>
       <td>Mosquito</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-48">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Merida virus</td>
       <td>NaN</td>
@@ -15428,6 +16638,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-49">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Molossus molossus associated gemycircularvirus 3</td>
       <td>NaN</td>
@@ -15748,6 +16983,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-50">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Mudumu virus</td>
       <td>NaN</td>
@@ -16068,6 +17328,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-51">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Mute swan feces associated ambidensovirus 7</td>
       <td>NaN</td>
@@ -16388,6 +17673,31 @@
       <td>NaN</td>
       <td>Tick</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-52">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Ndumu virus</td>
       <td>Accepted</td>
@@ -16708,6 +18018,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-53">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Norway nairovirus 1</td>
       <td>NaN</td>
@@ -17028,6 +18363,31 @@
       <td>NaN</td>
       <td>Mosquito</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-54">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Okhotskiy virus</td>
       <td>NaN</td>
@@ -17348,6 +18708,31 @@
       <td>37192107.0</td>
       <td>Mosquito</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-55">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Orthobunyavirus Abbeylake</td>
       <td>NaN</td>
@@ -17668,6 +19053,31 @@
       <td>NaN</td>
       <td>Tick</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-56">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Pacui virus</td>
       <td>NaN</td>
@@ -17988,6 +19398,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-57">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Parramatta River virus</td>
       <td>NaN</td>
@@ -18308,6 +19743,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-58">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Peruvian horse sickness virus</td>
       <td>Accepted</td>
@@ -18628,6 +20088,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-59">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Phlebovirus Cyprus</td>
       <td>NaN</td>
@@ -18948,6 +20433,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-60">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Phlebovirus XLL/China/2009</td>
       <td>NaN</td>
@@ -19268,6 +20778,31 @@
       <td>NaN</td>
       <td>Tick</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-61">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Phlebovirus sp. 24A</td>
       <td>NaN</td>
@@ -19588,6 +21123,31 @@
       <td>NaN</td>
       <td>Tick</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-62">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Phlebovirus sp. 72A</td>
       <td>NaN</td>
@@ -19908,6 +21468,31 @@
       <td>NaN</td>
       <td>Tick</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-63">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Phlebovirus sp. GML 902878</td>
       <td>NaN</td>
@@ -20228,6 +21813,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-64">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Phylloscopus proregulus ambidensovirus</td>
       <td>NaN</td>
@@ -20548,6 +22158,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-65">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Porcine associated gemycircularvirus 3</td>
       <td>NaN</td>
@@ -20868,6 +22503,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-66">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Proechimys cuvieri hepacivirus 1</td>
       <td>NaN</td>
@@ -21188,6 +22848,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-67">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Quang Binh virus</td>
       <td>NaN</td>
@@ -21508,6 +23193,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-68">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Rhinolophus ferrumequinum bocavirus</td>
       <td>NaN</td>
@@ -21828,6 +23538,31 @@
       <td>37255058.0</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-69">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Rodent bocaparvovirus 1</td>
       <td>NaN</td>
@@ -22148,6 +23883,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-70">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Salanga phlebovirus</td>
       <td>NaN</td>
@@ -22468,6 +24228,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-71">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Sango virus</td>
       <td>NaN</td>
@@ -22788,6 +24573,31 @@
       <td>30069670.0</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-72">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Saumarez Reef virus</td>
       <td>NaN</td>
@@ -23108,6 +24918,31 @@
       <td>NaN</td>
       <td>Mosquito</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-73">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Serra do Navio orthobunyavirus</td>
       <td>NaN</td>
@@ -23428,6 +25263,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-74">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Sigmodontinae hepacivirus</td>
       <td>NaN</td>
@@ -23748,6 +25608,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-75">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Sororoca virus</td>
       <td>NaN</td>
@@ -24068,6 +25953,31 @@
       <td>28606155.0</td>
       <td>Mosquito</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-76">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Tabanus rufidens flavivirus</td>
       <td>NaN</td>
@@ -24388,6 +26298,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-77">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Tataguine orthobunyavirus</td>
       <td>NaN</td>
@@ -24708,6 +26643,31 @@
       <td>NaN</td>
       <td>Tick</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-78">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Tick phlebovirus</td>
       <td>NaN</td>
@@ -25028,6 +26988,31 @@
       <td>35076005.0</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-79">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Toros phlebovirus</td>
       <td>NaN</td>
@@ -25348,6 +27333,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-80">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Turuna phlebovirus</td>
       <td>NaN</td>
@@ -25668,6 +27678,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-81">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Urucuri virus</td>
       <td>NaN</td>
@@ -25988,6 +28023,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-82">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Wenling hagfish alphavirus</td>
       <td>NaN</td>
@@ -26308,6 +28368,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-83">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Wufeng Niviventer fulvescens hepacivirus 1</td>
       <td>NaN</td>
@@ -26628,6 +28713,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-84">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Xiamen sepia Stingray hepacivirus</td>
       <td>NaN</td>
@@ -26948,6 +29058,31 @@
       <td>26542354.0</td>
       <td>Tick</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-85">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Zaliv Terpeniya virus</td>
       <td>NaN</td>
@@ -27268,6 +29403,31 @@
       <td>NaN</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-86">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Anopheles flavivirus</td>
       <td>NaN</td>
@@ -27588,6 +29748,31 @@
       <td>NaN</td>
       <td>Mosquito</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-87">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Barmah Forest virus</td>
       <td>Accepted</td>
@@ -27908,6 +30093,31 @@
       <td>37532005.0</td>
       <td>Mosquito</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-88">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Chiqui virus</td>
       <td>NaN</td>
@@ -28228,6 +30438,31 @@
       <td>NaN</td>
       <td>Mosquito</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-89">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>DakArK 7292 virus</td>
       <td>NaN</td>
@@ -28548,6 +30783,31 @@
       <td>18471057.0</td>
       <td>Tick</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-90">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Grenada mosquito rhabdovirus</td>
       <td>NaN</td>
@@ -28868,6 +31128,31 @@
       <td>37490108.0</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-91">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Ilomantsi virus</td>
       <td>NaN</td>
@@ -29188,6 +31473,31 @@
       <td>NaN</td>
       <td>Tick</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-92">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>lagos bat virus</td>
       <td>NaN</td>
@@ -29508,6 +31818,31 @@
       <td>NaN</td>
       <td>Tick</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-93">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Menghai flavivirus</td>
       <td>NaN</td>
@@ -29828,6 +32163,31 @@
       <td>29921327.0</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-94">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>nyamanini virus</td>
       <td>NaN</td>
@@ -30148,6 +32508,31 @@
       <td>1840609.0</td>
       <td>NaN</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-95">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Pseudocowpox virus</td>
       <td>Accepted</td>
@@ -30468,6 +32853,31 @@
       <td>30021614.0</td>
       <td>Mosquito</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-96">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>\nQuaranfil virus isolate Tick/Afghanistan/EGT377/1968</td>
       <td>NaN</td>
@@ -30788,6 +33198,31 @@
       <td>NaN</td>
       <td>Mosquito</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-97">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>simbu virus</td>
       <td>NaN</td>
@@ -31108,6 +33543,31 @@
       <td>NaN</td>
       <td>Mosquito</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-98">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Termeil virus</td>
       <td>NaN</td>
@@ -31428,6 +33888,31 @@
       <td>26811337.0</td>
       <td>Tick</td>
     </tr>
+  </tbody>
+</table>
+    </table>
+    
+    <table id="table-page-99">
+        <table border="1" class="dataframe dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Name</th>
+      <th>ICTV(MSL38.v1)Status</th>
+      <th>Order</th>
+      <th>Family</th>
+      <th>Genome Type</th>
+      <th>Baltimore Classification</th>
+      <th>Data Source</th>
+      <th>TaxID</th>
+      <th>Rank Level</th>
+      <th>Host</th>
+      <th>Infect Vertebrate</th>
+      <th>Infect Human</th>
+      <th>PMID</th>
+      <th>Vector-borne Source</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td>Uumaja virus</td>
       <td>NaN</td>
@@ -31670,5 +34155,12 @@
     </tr>
   </tbody>
 </table>
+    </table>
+    
+    <div id="pagination">
+        <button onclick="prevPage()">Previous</button>
+        <span id="current-page">1</span> / 99
+        <button onclick="nextPage()">Next</button>
+    </div>
 </body>
 </html>
