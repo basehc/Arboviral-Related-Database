@@ -21,22 +21,20 @@ The database encompasses detailed information on various viruses, including:
 
 ## Frequency Distribution of Viruses by Order![0](./pic/Frequency%20_Order.png)
 
-**Data Source**
----
+### **Data Source**
+
 | ZOVER | CDC(US) Website | Manual Annotation |
 | ----- | --------------- | ----------------- |
 | 1153  | 660             | 162               |
 
+### **Vector-borne Source**
 
-**Vector-borne Source**
----
 | Mosquito | Tick | Mosquito & Tick |
 | -------- | ---- | --------------- |
 | 453      | 285  | 20              |
 
+### **Infects Vertebrate**
 
-**Infects Vertebrate**
----
 | No   | Yes | Unknown |
 | ---- | --- | ------- |
 | 1102 | 535 | 338     |
