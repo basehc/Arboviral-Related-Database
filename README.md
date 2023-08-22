@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-
 # Arthropod-borne Virus Database
 
 The Arthropod-borne (Arboviruses) Virus Database is a comprehensive catalog of viruses carried by arthropods, developed as a significant part of our arthropod transcriptome virus identification program. Arboviruses are viruses that are transmitted by arthropods, such as mosquitoes and ticks, and can cause some of the most dangerous mosquito-borne diseases in the world, such as dengue, yellow fever, chikungunya and Zika. The importance of collecting annotated research on arboviruses is that it can help us better understand the diversity, characteristics, evolution and host interactions of arboviruses, and provide scientific basis and technical support for the prevention and control of these diseases. This database aims to give us a thorough understanding of virus variety, features, and virus-host interactions, which will aid in our understanding of the complexity of viruses carried by insects and other arthropods.
@@ -21,7 +19,7 @@ The database encompasses detailed information on various viruses, including:
 - **PMID:** PubMed identification number for related research.
 - **Vector-borne Source:** The arthropod vector responsible for transmitting the virus.
 
-## Frequency Distribution of Viruses by Order![0](./pic/Frequency_Order.png)
+## Frequency Distribution of Viruses by Order![0](./pic/Frequency%20_Order.png)
 
 **Data Source**
 
@@ -48,5 +46,3 @@ The database encompasses detailed information on various viruses, including:
 ## Feedback & Contributions
 
 We welcome feedback, corrections, and additional data contributions from the community. By working collaboratively, we can ensure that the Arthropod-borne Virus Database remains an up-to-date and invaluable tool for the related research community.
-
- 
